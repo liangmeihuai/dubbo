@@ -46,6 +46,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            System.out.println("Container start...args="+Arrays.deepToString(args));
             if (args == null || args.length == 0) {
                 String config = ConfigUtils.getProperty(CONTAINER_KEY, loader.getDefaultExtensionName());
                 args = Constants.COMMA_SPLIT_PATTERN.split(config);

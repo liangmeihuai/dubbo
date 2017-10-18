@@ -164,7 +164,8 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    <!--meihuaiedit-->
+                    <!--<descriptor>src/main/assembly/assembly.xml</descriptor>-->
                 </configuration>
                 <executions>
                     <execution>

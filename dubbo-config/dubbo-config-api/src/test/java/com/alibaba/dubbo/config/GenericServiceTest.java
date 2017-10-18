@@ -80,6 +80,7 @@ public class GenericServiceTest {
             try {
                 // say name
                 Assert.assertEquals("Generic Haha", demoService.sayName("Haha"));
+                System.out.println("meihuaitest,result="+demoService.sayName("Haha"));
                 // get users
                 List<User> users = new ArrayList<User>();
                 users.add(new User("Aaa"));

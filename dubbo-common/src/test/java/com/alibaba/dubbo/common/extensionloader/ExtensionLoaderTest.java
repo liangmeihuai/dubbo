@@ -119,6 +119,10 @@ public class ExtensionLoaderTest {
         assertNull(name);
     }
 
+    /**
+     * 根据extension的名称来获取extensionLoader
+     * @throws Exception
+     */
     @Test
     public void test_getExtension() throws Exception {
         assertTrue(ExtensionLoader.getExtensionLoader(SimpleExt.class).getExtension("impl1") instanceof SimpleExtImpl1);
@@ -202,11 +206,11 @@ public class ExtensionLoaderTest {
             assertThat(expected.getMessage(), containsString("Extension name == null"));
         }
     }
-
     @Test
     public void test_getSupportedExtensions() throws Exception {
-        Set<String> exts = ExtensionLoader.getExtensionLoader(SimpleExt.class).getSupportedExtensions();
-
+//        Set<String> exts = ExtensionLoader.getExtensionLoader(SimpleExt.class).getSupportedExtensions();
+        ExtensionLoader<SimpleExt> simpleExtExtensionLoader= ExtensionLoader.getExtensionLoader(SimpleExt.class);
+        Set<String> exts=simpleExtExtensionLoader.getSupportedExtensions();
         Set<String> expected = new HashSet<String>();
         expected.add("impl1");
         expected.add("impl2");
@@ -217,12 +221,12 @@ public class ExtensionLoaderTest {
 
     @Test
     public void test_getSupportedExtensions_wrapperIsNotExt() throws Exception {
-        Set<String> exts = ExtensionLoader.getExtensionLoader(WrappedExt.class).getSupportedExtensions();
-
+//        Set<String> exts = ExtensionLoader.getExtensionLoader(WrappedExt.class).getSupportedExtensions();
+        ExtensionLoader<WrappedExt> wrappedExtExtensionLoader=ExtensionLoader.getExtensionLoader(WrappedExt.class);
+        Set<String> exts = wrappedExtExtensionLoader.getSupportedExtensions();
         Set<String> expected = new HashSet<String>();
         expected.add("impl1");
         expected.add("impl2");
-
         assertEquals(expected, exts);
     }
 

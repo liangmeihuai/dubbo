@@ -385,6 +385,10 @@ public final class StringUtils {
         return buf.toString();
     }
 
+    public static void main(String[] args) {
+        String str="bankCashMachineAndClerk";
+        System.out.println("transfromer format str="+camelToSplitName(str,"-"));
+    }
     public static String camelToSplitName(String camelName, String split) {
         if (camelName == null || camelName.length() == 0) {
             return camelName;

@@ -77,23 +77,28 @@ public class DubboBeanDefinitionParser implements BeanDefinitionParser {
         RootBeanDefinition beanDefinition = new RootBeanDefinition();
         beanDefinition.setBeanClass(beanClass);
         beanDefinition.setLazyInit(false);
+        //取到这个标签的id属性<dubbo:service interface="com.alibaba.dubbo.demo.DemoService" ref="demoService" delay="4"/>
         String id = element.getAttribute("id");
+        //如果这个id为null或者长度为0，并且是必须需要id
         if ((id == null || id.length() == 0) && required) {
+            //那么就通过这个标签的name来获取名称id
             String generatedBeanName = element.getAttribute("name");
             if (generatedBeanName == null || generatedBeanName.length() == 0) {
-                if (ProtocolConfig.class.equals(beanClass)) {
+                if (ProtocolConfig.class.equals(beanClass)) {//如果是ProtocolConfig为beanClass那么名称id就是"dubbo"
                     generatedBeanName = "dubbo";
-                } else {
+                } else {//否则直接取接口，作为名称id
                     generatedBeanName = element.getAttribute("interface");
                 }
             }
+            //如果还是为空，那么就取类的名称为id
             if (generatedBeanName == null || generatedBeanName.length() == 0) {
                 generatedBeanName = beanClass.getName();
             }
+            //赋值给id
             id = generatedBeanName;
             int counter = 2;
             while (parserContext.getRegistry().containsBeanDefinition(id)) {
-                id = generatedBeanName + (counter++);
+                id = generatedBeanName + (counter++);//不断循环id，使得这个id变成唯一
             }
         }
         if (id != null && id.length() > 0) {
